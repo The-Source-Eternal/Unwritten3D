@@ -1,4 +1,7 @@
 var setupPointerlock = require('./lib/setupPointerlock.js')
+var ComponentClass = require('./lib/components.js').ComponentClass
+var ComponentInstance = require('./lib/components.js').ComponentInstance
+var ComponentManager = require('./lib/components.js').ComponentManager
 
 // var camera, scene, renderer
 var controls
@@ -12,6 +15,7 @@ var projector, raycaster
 
 setupPointerlock( pointerLockUpdate )
 init()
+initComponents()
 mainLoop()
 
 function init() {
@@ -114,6 +118,26 @@ function init() {
   //
 
   window.addEventListener( 'resize', onWindowResize, false )
+  
+  window.addEventListener( 'click', onClick, false )
+
+}
+
+function initComponents() {
+
+  compManager = new ComponentManager()
+
+  spinnerComponent = new ComponentClass({
+    name: 'spinner',
+    src: [
+      '// spinner',
+      'this.update = function () {',
+      '  target.rotateY(0.1)',
+      '}',
+      ].join('\n')
+  })
+
+  compManager.registerComponentClass( spinnerComponent )
 
 }
 
@@ -148,6 +172,14 @@ function onWindowResize() {
 
 }
 
+function onClick() {
+
+  if (controls.enabled && currentHover) {
+    activateObject( currentHover )
+  }
+
+}
+
 function mainLoop() {
 
   requestAnimationFrame( mainLoop )
@@ -155,6 +187,7 @@ function mainLoop() {
 
   updatePlayerControls()
   updateMouseOver()
+  compManager.runComponentUpdate()
 
   //
 
@@ -204,6 +237,10 @@ function updateIntersects(intersects) {
     currentHover = null
 
   }
+}
+
+function activateObject(target) {
+  compManager.instantiateComponent( spinnerComponent, target )
 }
 
 function updatePlayerControls() {

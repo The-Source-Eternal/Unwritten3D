@@ -8,5 +8,8 @@
     "start": "beefy index.js --live --open"
   },
   "author": "",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "extend": "~1.2.1"
+  }
 }
