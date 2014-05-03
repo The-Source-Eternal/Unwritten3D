@@ -1,8 +1,9 @@
 var setupPointerlock = require('./lib/setupPointerlock.js')
 
 // var camera, scene, renderer
-// var controls
+var controls
 
+var boxSize = 5
 var allObjects = []
 var currentHover
 var gravityRay
@@ -73,8 +74,9 @@ function init() {
 
   // objects
 
-  geometry = new THREE.BoxGeometry( 20, 20, 20 )
+  geometry = new THREE.BoxGeometry( boxSize, boxSize, boxSize )
 
+  // randomly colorize faces
   for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
 
     var face = geometry.faces[ i ]
@@ -84,14 +86,15 @@ function init() {
 
   }
 
+  // randomly place boxes
   for ( var i = 0; i < 500; i ++ ) {
 
     material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } )
 
     var mesh = new THREE.Mesh( geometry, material )
-    mesh.position.x = Math.floor( Math.random() * 20 - 10 ) * 20
-    mesh.position.y = Math.floor( Math.random() * 20 ) * 20 + 10
-    mesh.position.z = Math.floor( Math.random() * 20 - 10 ) * 20
+    mesh.position.x = Math.floor( Math.random() * 50 - boxSize/2 ) * boxSize
+    mesh.position.y = Math.floor( Math.random() * 20 ) * boxSize + boxSize/2
+    mesh.position.z = Math.floor( Math.random() * 50 - boxSize/2 ) * boxSize
     scene.add( mesh )
 
     material.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 )
