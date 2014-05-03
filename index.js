@@ -11,16 +11,47 @@ var gravityRay
 
 var projector, raycaster
 
-engine = new Engine()
-engine.on('mainLoop',function(){
-  updatePlayerControls()
-})
 
-setupPointerlock( pointerLockUpdate )
-initComponents()
-init()
+start()
 
-function init() {
+function start() {
+
+  engine = new Engine()
+
+  setupControls()
+  defineComponents()
+  buildLevel()
+  engine.start()
+
+}
+
+function setupControls() {
+
+  // camera controls
+  setupPointerlock( pointerLockUpdate )
+  engine.on('mainLoop',function(){
+    updatePlayerControls()
+  })
+
+  engine.on('hoverChanged',function(currentHover){
+    var reticleElement = document.getElementById('reticle')
+    reticleElement.classList.remove('activate')
+    var activateFound = false
+
+    if (!currentHover) return
+    // check for activate method
+    engine.compManager.componentsForObject(currentHover).map(function(comp) {
+      if (comp.instance.activate) activateFound = true
+    })
+
+    if (activateFound) reticleElement.classList.add('activate')
+  })
+
+  window.addEventListener( 'click', onClick, false )
+
+}
+
+function buildLevel() {
 
   var geometry, material, mesh
 
@@ -110,17 +141,9 @@ function init() {
 
   }
 
-  //
-
-  window.addEventListener( 'click', onClick, false )
-
-  //
-
-  engine.start()
-
 }
 
-function initComponents() {
+function defineComponents() {
 
   spinnerComponent = new ComponentClass({
     name: 'spinner',
