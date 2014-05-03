@@ -9,3 +9,8 @@ Start
 ```bash
 npm start
 ```
+
+Publish to gh-pages (requires commit access)
+```bash
+npm run publish
+```
