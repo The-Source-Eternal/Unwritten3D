@@ -1,9 +1,7 @@
+var Engine = require('./lib/engine.js')
 var setupPointerlock = require('./lib/setupPointerlock.js')
 var ComponentClass = require('./lib/components.js').ComponentClass
-var ComponentInstance = require('./lib/components.js').ComponentInstance
-var ComponentManager = require('./lib/components.js').ComponentManager
 
-// var camera, scene, renderer
 var controls
 
 var boxSize = 5
@@ -13,18 +11,23 @@ var gravityRay
 
 var projector, raycaster
 
+engine = new Engine()
+engine.on('mainLoop',function(){
+  updatePlayerControls()
+})
+
 setupPointerlock( pointerLockUpdate )
-init()
 initComponents()
-mainLoop()
+init()
 
 function init() {
 
   var geometry, material, mesh
 
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 )
+  var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 )
+  engine.currentCamera = camera
 
-  scene = new THREE.Scene()
+  scene = engine.primaryScene
   scene.fog = new THREE.Fog( 0xffffff, 0, 750 )
 
   var light = new THREE.DirectionalLight( 0xffffff, 1.5 )
@@ -42,11 +45,6 @@ function init() {
 
   gravityRay = new THREE.Raycaster()
   gravityRay.ray.direction.set( 0, -1, 0 )
-
-  //
-
-  projector = new THREE.Projector()
-  raycaster = new THREE.Raycaster()
 
   // floor
 
@@ -90,7 +88,7 @@ function init() {
 
   }
 
-  // randomly place boxes
+  // randomly create boxes
   for ( var i = 0; i < 500; i ++ ) {
 
     material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } )
@@ -103,41 +101,58 @@ function init() {
 
     material.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 )
 
+    // add components
+    engine.compManager.instantiateComponent( hoverComponent, mesh )
+    var spinner = engine.compManager.instantiateComponent( spinnerComponent, mesh )
+    spinner.instance.updateDisabled = true
+
     allObjects.push( mesh )
 
   }
 
   //
 
-  renderer = new THREE.WebGLRenderer()
-  renderer.setClearColor( 0xffffff )
-  renderer.setSize( window.innerWidth, window.innerHeight )
-
-  document.body.appendChild( renderer.domElement )
+  window.addEventListener( 'click', onClick, false )
 
   //
 
-  window.addEventListener( 'resize', onWindowResize, false )
-  
-  window.addEventListener( 'click', onClick, false )
+  engine.start()
 
 }
 
 function initComponents() {
 
-  compManager = new ComponentManager()
-
   spinnerComponent = new ComponentClass({
     name: 'spinner',
     src: [
       '// spinner',
-      'this.update = function () {',
-      '  target.rotateY(0.1)',
-      '}',
+      'this.activate = '+function () {
+        this.updateDisabled = !this.updateDisabled
+      },
+      'this.update = '+function () {
+        target.rotateY(0.1)
+      },
       ].join('\n')
   })
 
-  compManager.registerComponentClass( spinnerComponent )
+  engine.compManager.registerComponentClass( spinnerComponent )
+
+  hoverComponent = new ComponentClass({
+    name: 'hover',
+    src: [
+      '// hover',
+      'var oldColor',
+      'this.mouseEnter = '+function () {
+        oldColor = target.material.color.getHex()
+        target.material.color.setHex( 0xff0000 )
+      },
+      'this.mouseExit = '+function () {
+        target.material.color.setHex( oldColor )
+      },
+      ].join('\n')
+  })
+
+  engine.compManager.registerComponentClass( hoverComponent )
 
 }
 
@@ -163,84 +178,22 @@ function drawLine(start, end) {
     return line
 }
 
-function onWindowResize() {
-
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-
-  renderer.setSize( window.innerWidth, window.innerHeight )
-
-}
-
 function onClick() {
 
-  if (controls.enabled && currentHover) {
-    activateObject( currentHover )
+  if (!engine.currentIntersects.length) return
+
+  var target = engine.currentIntersects[0].object
+
+  if (controls.enabled && target) {
+    activateObject( target )
   }
 
-}
-
-function mainLoop() {
-
-  requestAnimationFrame( mainLoop )
-
-
-  updatePlayerControls()
-  updateMouseOver()
-  compManager.runComponentUpdate()
-
-  //
-
-  renderer.render( scene, camera )
-
-}
-
-function updateMouseOver() {
-// find intersections
-
-  var raycastOrigin = new THREE.Vector3();
-  raycastOrigin.setFromMatrixPosition( controls.getObject().matrixWorld );
-
-  var vector = new THREE.Vector3( 0, 0, 1 )
-  projector.unprojectVector( vector, camera )
-  vector.sub( raycastOrigin ).normalize()
-
-  raycaster.set( raycastOrigin, vector )
-
-  var intersects = raycaster.intersectObjects( scene.children )
-
-  // if (intersects[0]) {
-  //   var debugOrigin = raycastOrigin.clone().add(vector.clone().multiplyScalar(0.5));
-  //   drawLine( debugOrigin, intersects[0].point )
-  // }
-
-  updateIntersects(intersects)
-}
-
-function updateIntersects(intersects) {
-  if ( intersects.length > 0 ) {
-
-    if ( currentHover != intersects[ 0 ].object ) {
-
-      if ( currentHover ) currentHover.material.color.setHex( currentHover.currentHex )
-
-      currentHover = intersects[ 0 ].object
-      currentHover.currentHex = currentHover.material.color.getHex()
-      currentHover.material.color.setHex( 0xff0000 )
-
-    }
-
-  } else {
-
-    if ( currentHover ) currentHover.material.color.setHex( currentHover.currentHex )
-
-    currentHover = null
-
-  }
 }
 
 function activateObject(target) {
-  compManager.instantiateComponent( spinnerComponent, target )
+  engine.compManager.componentsForObject(target).map(function(comp) {
+    comp.run('activate')
+  })
 }
 
 function updatePlayerControls() {
