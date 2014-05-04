@@ -104,12 +104,12 @@ input.Number {
   cursor: col-resize;
 }
 
-#viewport {
+#code-editor {
   position: absolute;
-  top: 32px;
+  top: 0px;
   left: 0px;
-  right: 300px;
-  bottom: 32px;
+  right: 250px;
+  bottom: 0px;
 }
 
 #menubar {

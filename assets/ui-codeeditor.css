@@ -1,0 +1,13 @@
+/* A few style overrides for the CodeMirror */
+
+#code-editor > .CodeMirror {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(39, 40, 34, 0.44);
+}
+
+/* syntax highlighting - commented code */
+#code-editor > .CodeMirror span.cm-comment {
+  color: #FFE87B;
+}
