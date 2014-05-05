@@ -41,7 +41,24 @@ hr {
 }
 
 button {
-  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #888;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 3px 6px;
+}
+
+button:hover {
+  background: #BBB;
+}
+
+button.active {
+  background: #BBB;
+}
+
+button.active:hover {
+  background: #DDD;
 }
 
 .Panel {
