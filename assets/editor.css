@@ -123,33 +123,33 @@ input.Number {
 
 #code-editor {
   position: absolute;
+  top: 32px;
+  left: 0px;
+  right: 250px;
+  bottom: 32px;
+}
+
+#topbar {
+  position: absolute;
   top: 0px;
   left: 0px;
   right: 250px;
-  bottom: 0px;
-}
-
-#menubar {
-  position: absolute;
-  width: 100%;
   height: 32px;
-  background-color: #111;
-  padding: 0px;
-  margin: 0px;
-  z-index: 10;
+  background-color: rgba(17, 17, 17, 0.75);
+  color: #888;
 }
 
-  #menubar .menu {
+  #topbar .menu {
     float: left;
     width: 50px;
     cursor: pointer;
   }
 
-  #menubar .Panel {
+  #topbar .Panel {
     color: #888;
   }
 
-    #menubar .menu .options {
+    #topbar .menu .options {
       display: none;
       padding: 5px 0px;
       background-color: #111;
@@ -157,22 +157,22 @@ input.Number {
       border-top: solid 1px #1D1D1D;
     }
 
-    #menubar .menu:hover .options {
+    #topbar .menu:hover .options {
       display: block;
     }
 
-      #menubar .menu .options hr {
+      #topbar .menu .options hr {
         border-color: #444;
       }
 
-      #menubar .menu .options .option {
+      #topbar .menu .options .option {
         color: #666;
         background-color: transparent;
         padding: 5px 10px;
         margin: 0px !important;
       }
 
-        #menubar .menu .options .option:hover {
+        #topbar .menu .options .option:hover {
           color: #fff;
           background-color: #08f;
         }
@@ -180,9 +180,9 @@ input.Number {
 
 #sidebar {
   position: absolute;
-  right: 0px;
   top: 0px;
   bottom: 0px;
+  right: 0px;
   width: 250px;
   background-color: rgba(17, 17, 17, 0.75);
   color: #888;
@@ -233,22 +233,23 @@ input.Number {
       border-top: 1px solid #ccc;
     }
 
-#toolbar {
+#bottombar {
   position: absolute;
-  left: 0px;
-  right: 300px;
-  bottom: 0px;
   height: 32px;
-  background-color: #111;
-  color: #333;
+  bottom: 0px;
+  left: 0px;
+  right: 250px;
+  background-color: rgba(17, 17, 17, 0.75);
+  color: #888;
+  overflow: auto;
 }
 
-  #toolbar .Panel {
+  #bottombar .Panel {
     padding: 4px;
     color: #888;
   }
 
-  #toolbar button {
+  #bottombar button {
     margin-right: 6px;
   }
 
