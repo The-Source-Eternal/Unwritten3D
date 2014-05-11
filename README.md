@@ -14,3 +14,5 @@ Publish to gh-pages (requires commit access)
 ```bash
 npm run publish
 ```
+
+For more information on npm (node packaged modules): https://www.npmjs.org
