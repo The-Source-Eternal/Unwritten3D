@@ -7,7 +7,7 @@ To open the editor once you are playing, press "q".
 Install
 ```bash
 git clone git@github.com:The-Source-Eternal/Unwritten3D.git
-cd Source
+cd Unwritten3D
 npm install
 ```
 
