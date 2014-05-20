@@ -5,7 +5,7 @@ You will need to have webGL capabilities to view the [demo] (http://the-source-e
 
 To open the editor once you are playing, press "q".
 
-To build our latest version locally you'll need to be able to use your command line. If you're new to the command line, you might want to check out the [command line crash course in Learning Coding The Hard Way](http://learncodethehardway.org/cli/book/cli-crash-course.html), though it's a bit dictatorial).
+To build our latest version locally you'll need to be able to use your command line. If you're new to the command line, you might want to check out the [command line crash course in Learning Coding The Hard Way](http://learncodethehardway.org/cli/book/cli-crash-course.html), though it's a bit dictatorial.
 
 #### See it on your local machine
 1) [Open your terminal] (http://learncodethehardway.org/cli/book/cli-crash-course.html#do-this).
