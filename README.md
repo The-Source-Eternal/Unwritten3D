@@ -39,12 +39,8 @@ Navigate to the repo's folder in your directory (or drag and drop the Unwritten3
 cd ~/[pathToContainingFolder]/Unwritten3D
 ```
 
-Start:
+Start and publish:
 ```bash
 npm start
-```
-
-Publish:
-```bash
 npm run publish
 ```
