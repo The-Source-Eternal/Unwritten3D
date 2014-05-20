@@ -1,4 +1,4 @@
-The Source Eternal aims to be an open source puzzle/adventure web-based game to demistify programming and game-making. We are currently prototyping our own open source engine using three.js and a couple of other libraries and borrowing code from a few more. We hope we can build a more intuitive interface for manipulating objects and one that is available in the browser.
+Unwritten3D is a prototype for an open source online game engine and creator using three.js and a couple of other libraries, and borrowing code from a few more. We hope to experiment with a more intuitive way of manipulating the building blocks that make up your game
 
 You will need to have webGL capabilities to view the demo. You can check if you have webGL here: http://get.webgl.org
 
