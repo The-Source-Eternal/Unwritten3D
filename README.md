@@ -20,7 +20,6 @@ cd ~/[aFolderInYourHomeDirectory]/[aFolderInsideThat]/[keepGoingTillYouReachTheF
 Clone this repository:
 ```bash
 git clone git@github.com:The-Source-Eternal/Unwritten3D.git
-cd Unwritten3D
 ```
 
 Double click the index.html file in the folder or drag and drop index.html into the icon of a browser of your choice.
