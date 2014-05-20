@@ -12,7 +12,7 @@ To build our latest version locally you'll need to be able to use your command l
 
 [Navigate](http://en.wikipedia.org/wiki/Cd_(command)) to the folder that you want the repo to be in:
 - In OSX 10.9 (Mavericks), you can drag and drop the folder you want to use onto the terminal app icon (in the dock or in your Applications folder).
-- Otherwise, replace all the stuff in brackets with names from your own directory ([what is a home folder?](https://www.google.com/search?q=what+is+a+home+folder%3F&rlz=1C5ACMJ_enUS519US519&oq=what+is+a+home+folder%3F&aqs=chrome..69i57j0l5.2952j0j7&sourceid=chrome&es_sm=91&ie=UTF-8))
+- Otherwise, replace all the stuff in brackets with names from your own directory ([what is a home folder?](https://www.google.com/search?q=what+is+a+home+folder%3F&rlz=1C5ACMJ_enUS519US519&oq=what+is+a+home+folder%3F&aqs=chrome..69i57j0l5.2952j0j7&sourceid=chrome&es_sm=91&ie=UTF-8)):
 ```bash
 cd ~/[aFolderInYourHomeDirectory]/[aFolderInsideThat]/[keepGoingTillYouReachTheFolderYouWant]
 ```
