@@ -126,7 +126,14 @@ input.Number {
   top: 32px;
   left: 0px;
   right: 250px;
+}
+
+#code-editor.code-editor-expanded {
   bottom: 32px;
+}
+
+#code-editor.code-editor-minimized {
+  height: 0px;
 }
 
 #topbar {
