@@ -24,7 +24,7 @@ Having it on your local machine is a bit more complicated than just cloning the 
 
 _Remember, while playing you can press 'q' to open the editor._
 
-#### Publish to the website
+### Publish to the website
 To publish to the website, you'll need commit access.
 
 1) Do everything in the previous section, including viewing it to test whether you've broken anything
