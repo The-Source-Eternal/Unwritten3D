@@ -1,47 +1,31 @@
-Unwritten3D is a prototype for an open source online game engine and creator using three.js and a couple of other libraries, and borrowing code from a few more. We hope to experiment with a more intuitive way of manipulating the building blocks that make up your game
+Unwritten3D is a prototype for an open source online game engine and creator using three.js and a couple of other libraries, and borrowing code from a few more. We hope to experiment with a more intuitive way of manipulating the building blocks that make up your game.
 
 You will need to have webGL capabilities to view the [demo] (http://the-source-eternal.github.io/Unwritten3D/
 ). You can check if you have webGL here: http://get.webgl.org
 
 To open the editor once you are playing, press "q".
 
-To build our latest version locally you'll need to be able to use your command line. If you're new to the command line, you might want to check out the [command line crash course in Learning Coding The Hard Way](http://learncodethehardway.org/cli/book/cli-crash-course.html), though it's a bit dictatorial.
+Having it on your local machine is a bit more complicated than just cloning the repo and dragging index.html into your browser. The instructions are written just below. This is because Unwritten3D has to use a server and, working locally, a tiny temporary one needs to be created.
 
-#### See it on your local machine
-1) [Open your terminal] (http://learncodethehardway.org/cli/book/cli-crash-course.html#do-this).
+### See and edit it on your local machine
+#### Requirements:
+* A familiarity with the command line
+ - If you're new to the command line, you might want to check out the [command line crash course in Learning Coding The Hard Way](http://learncodethehardway.org/cli/book/cli-crash-course.html), though some find it a bit dictatorial.
+* A browser with webgl capabilities
+* git
+ - [git's official installation instructions](http://git-scm.com/book/en/Getting-Started-Installing-Git)
+ - A [step-by-step of installing homebrew and then using that to install git](http://vimeo.com/14649488), which is simpler than a lot of other ways
+* [npm, node package manager, installed globally](http://nodejs.org)
 
-2) [Navigate](http://en.wikipedia.org/wiki/Cd_(command)) to the folder that you want the repo to be in:
-
- - In OSX 10.9 (Mavericks), you can drag and drop the folder you want to use onto the terminal app icon (in the dock or in your Applications folder).
- - Otherwise, replace all the stuff in brackets with names from your own directory ([what is a home folder?](https://www.google.com/search?q=what+is+a+home+folder%3F&rlz=1C5ACMJ_enUS519US519&oq=what+is+a+home+folder%3F&aqs=chrome..69i57j0l5.2952j0j7&sourceid=chrome&es_sm=91&ie=UTF-8)):
-```bash
-cd ~/[aFolderInYourHomeDirectory]/[aFolderInsideThat]/[keepGoingTillYouReachTheFolderYouWant]
-```
-
-3) Clone this repository:
-```bash
-git clone git@github.com:The-Source-Eternal/Unwritten3D.git
-```
-
-4) Double click the index.html file in the folder or drag and drop index.html into the icon of a browser of your choice.
+1) [Fork this repository](https://help.github.com/articles/fork-a-repo)
+2) Install npm locally (gets some necessary files) - while in the folder for your local git repo (in Mac you can just drag the folder onto the terminal app icon), type: ```npm install```
+3) Edit the files or not, as you wish
+4) To launch it in your default browser, while in the same terminal window as before type: ```npm start```
 
 _Remember, while playing you can press 'q' to open the editor._
 
 #### Publish to the website
-To publish to the website, you'll need commit access. You'll also need [node package modules (or npm)](https://www.npmjs.org).
+To publish to the website, you'll need commit access.
 
-1) Install node package modules (npm) if you don't have it (or follow [their installation advice](http://blog.npmjs.org/post/85484771375/how-to-install-npm)):
-```bash
-npm install
-```
-
-2) Navigate to the repo's folder in your directory (or drag and drop the Unwritten3D folder onto the command line app):
-```bash
-cd ~/[pathToContainingFolder]/Unwritten3D
-```
-
-3) Start and publish:
-```bash
-npm start
-npm run publish
-```
+1) Do everything in the previous section, including viewing it to test whether you've broken anything
+2) Do ```npm run publish```
